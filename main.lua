@@ -15,8 +15,6 @@ local platform = display.newImageRect("platform.png",360,50)
 platform.x = display.contentCenterX
 platform.y = display.contentHeight + 25
 
-platform.surfaceType = "reset"
-
 local ball = display.newImageRect("ball.png", 100, 100 )
 ball.x = display.contentCenterX
 ball.y = 0
@@ -46,14 +44,9 @@ end
 
 ball:addEventListener("tap", pushBall)
 
-local function onCollision( self, event )
-
-    local collideObject = event.other
-    if ( collideObject.surfaceType == "reset" ) then
-        tapCount = 0
-        tapText.text = tapCount
-    end
+local function onCollision()
+    tapCount = 0
+    tapText = tapCount
 end
 
-ball.collision = onCollision
-ball:addEventListener( "collision" )
+ball:addEventListener( "collision", onCollision )
